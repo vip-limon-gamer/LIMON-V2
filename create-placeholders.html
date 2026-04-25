@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Placeholder Images</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        // This script generates placeholder images
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function createPlaceholder(width, height, text, filename) {
+            canvas.width = width;
+            canvas.height = height;
+            
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, width, height);
+            gradient.addColorStop(0, '#00f0ff');
+            gradient.addColorStop(1, '#7b2cbf');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+            
+            // Text
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 48px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(text, width / 2, height / 2);
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Generate images
+        setTimeout(() => {
+            createPlaceholder(400, 400, 'Profile', 'profile-placeholder.jpg');
+        }, 100);
+        
+        setTimeout(() => {
+            createPlaceholder(800, 600, 'Project 1', 'project1-placeholder.jpg');
+        }, 500);
+        
+        setTimeout(() => {
+            createPlaceholder(800, 600, 'Project 2', 'project2-placeholder.jpg');
+        }, 900);
+        
+        setTimeout(() => {
+            createPlaceholder(800, 600, 'Project 3', 'project3-placeholder.jpg');
+        }, 1300);
+    </script>
+</body>
+</html>
